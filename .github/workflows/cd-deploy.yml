@@ -17,9 +17,4 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - run: |
-          echo "Deploying to staging..."
-          # Add your actual deployment commands here
-          # Example:
-          # cd backend && npm run deploy
-          # cd ../ai-service && python deploy.py
+      - run: echo "Add your deployment commands here"
