@@ -1,0 +1,25 @@
+name: Deploy to Staging
+on:
+  workflow_run:
+    workflows: ["Backend CI", "AI Service CI"]
+    branches: [main]
+    types: [completed]
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - run: |
+          echo "Deploying to staging..."
+          # Add your actual deployment commands here
+          # Example:
+          # cd backend && npm run deploy
+          # cd ../ai-service && python deploy.py
